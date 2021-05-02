@@ -29,7 +29,7 @@ export class BackendQuestionService {
         map( response => {
           return response?.results.map( question => {
             return new Question(
-              question.question,
+              this.convertQustion(question.question),
               question.correct_answer,
               question.incorrect_answers);
           });
@@ -40,5 +40,14 @@ export class BackendQuestionService {
         })
 
       );
+  }
+
+  convertQustion(str) {
+    str = str.replace(/&/g, "&amp;");
+    str = str.replace(/>/g, "&gt;");
+    str = str.replace(/</g, "&lt;");
+    str = str.replace(/"/g, "&quot;");
+    str = str.replace(/'/g, "&#039;");
+    return str;
   }
 }

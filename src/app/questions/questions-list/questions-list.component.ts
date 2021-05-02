@@ -1,19 +1,23 @@
 import { BackendQuestionService } from '../../share/services/backend-question.service';
 import { QuestionService } from '../question.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Question } from '../question.model';
 import { PlayQuestionService } from '../../share/services/play-questions.service';
 import { Answer } from 'src/app/share/answer.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-questions-list',
   templateUrl: './questions-list.component.html',
   styleUrls: ['./questions-list.component.css']
 })
-export class QuestionsListComponent implements OnInit {
+export class QuestionsListComponent implements OnInit, OnDestroy {
 
   questions: Question[];
   answers: Answer[];
+  private SubscriptionfetchQuestions: Subscription;
+  private SubscriptionQuestionsChanged: Subscription;
+  private SubscriptionquestionAnswerAdded: Subscription;
  
 	constructor(
     private BackendService: BackendQuestionService,
@@ -29,11 +33,11 @@ export class QuestionsListComponent implements OnInit {
   }
 
   fetchQustionFromBackend() {
-    this.BackendService.fetchQuestions().subscribe();
+    this.SubscriptionfetchQuestions = this.BackendService.fetchQuestions().subscribe();
   }
 
   questionsChanges() {
-    this.questionService.questionsChanged.subscribe( 
+    this.SubscriptionQuestionsChanged = this.questionService.questionsChanged.subscribe( 
       questions => {
         this.questions = questions;
       }, error => {
@@ -42,7 +46,7 @@ export class QuestionsListComponent implements OnInit {
   }
 
   questionAnswerAdded() {
-    this.playQuestionService.questionAnswerAdded.subscribe(
+    this.SubscriptionquestionAnswerAdded = this.playQuestionService.questionAnswerAdded.subscribe(
       answers => {
         this.answers = answers;
       }, error => {
@@ -52,6 +56,12 @@ export class QuestionsListComponent implements OnInit {
 
   resetGame() {
     this.playQuestionService.handleRestPlay();
+  }
+
+  ngOnDestroy() {
+    this.SubscriptionfetchQuestions.unsubscribe();
+    this.SubscriptionQuestionsChanged.unsubscribe();
+    this.SubscriptionquestionAnswerAdded.unsubscribe();
   }
   
 }

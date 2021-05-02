@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Question } from '../../questions/question.model';
 import { environment } from '../../../environments/environment';
+import { BackendQuestionService } from './backend-question.service';
 import { Answer } from '../answer.model'
 
 @Injectable({ providedIn: 'root' })
@@ -13,6 +14,7 @@ export class PlayQuestionService {
   private answers: Answer[] = [];
 
   constructor(
+    private BackendQuestionService: BackendQuestionService
   ) {}
 
   addAnswer(answers: Answer) {
@@ -24,6 +26,7 @@ export class PlayQuestionService {
     this.answers = [];
     this.restPlayRequset.next(true);
     this.questionAnswerAdded.next(this.answers?.slice());
+    this.BackendQuestionService.fetchQuestions().subscribe();
   }
 
   getAnswers() {
