@@ -1,0 +1,29 @@
+<div class="questions-list">
+    <div class="p-grid">
+        <div class="list-box p-col-6 p-offset-3">
+            <p-carousel [value]="questions" [numVisible]="1" [numScroll]="1" [circular]="false">
+                <ng-template pTemplate="header">
+                    <div class="header-box">
+                        <div class="p-grid">
+                            <div class="p-col-6 p-offset-3">
+                                <button pButton type="button" label="Restart" class="p-button-sm"
+                                 (click)="resetGame()">
+                                </button>
+                                <h5 class="answered-title"><span> Answered </span>{{ answers?.length || '0' }}/{{ questions?.length || '0' }}</h5>
+                            </div>
+                        </div>        
+                    </div>
+                </ng-template>
+
+                <ng-template let-question pTemplate="item">
+                    <app-questions-item [question]="question">
+                    </app-questions-item>
+                </ng-template>
+
+            </p-carousel>
+        </div>
+        <div class="p-col-6 p-offset-3" *ngIf="questions?.length > 0 && answers?.length === questions?.length">
+            <app-results></app-results>
+        </div>
+    </div>
+</div>

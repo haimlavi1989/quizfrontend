@@ -1,0 +1,35 @@
+<div class="question-item">
+    <div class="question-item-content">
+        <div class="question-title">
+            <h5>{{ question?.question }}</h5>
+        </div>
+        <div class="question-options">
+            <div class="p-grid">
+                <div class="p-col-6" 
+                    *ngFor="let shuffle_answer of question.shuffle_answers;
+                     let optionNumber = index">
+                    <div class="option-box" 
+                        (click)="radio.click()" 
+                        [attr.data-answer]="shuffle_answer" 
+                        [ngClass]="{'incorrect': (userAnswersStatus[optionNumber] === 0) }"
+                        [ngClass]="{'correct': (userAnswersStatus[optionNumber] === 1) }"
+                        >
+
+                        <input type="radio" #radio
+                            id="{{'answer-'}}{{ optionNumber+1 }}"
+                            name="{{ question.id }}" 
+                            value="{{ shuffle_answer }}"
+                            (click)="checkAnswer(shuffle_answer, optionNumber)"
+                            [disabled]="userAnswersStatus[optionNumber] !== -1" 
+                        >
+                        <label for="{{'answer-'}}{{ optionNumber+1 }}">
+                           {{optionNumber+1}}.{{ shuffle_answer }}
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>        
+    </div>
+</div>
+
+
