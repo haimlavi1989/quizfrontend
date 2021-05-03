@@ -22,6 +22,15 @@ export class QuestionService {
     this.questionsChanged.next(this.questions?.slice());
   }
 
+  checkAnswer(qustionId: number, userAnswer: string, answerPosition: number) {
+    let questionArray = this.questions.filter( item => item.id === qustionId );
+    if (questionArray[0].correct_answer === userAnswer 
+      && questionArray[0].shuffle_answers[answerPosition]) {
+      return true;
+    }
+    return false;
+  }
+
   getNumberOfQuestions() { 
     return this.questions?.length;
   }

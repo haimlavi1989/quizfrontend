@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 
 export class Question {
     id?: number;
@@ -11,7 +12,7 @@ export class Question {
         public incorrect_answers: string[],
         public shuffle_answers?: string[],
     ) {
-        this.id = Date.now();
+        this.id = uuidv4();
         this.shuffle_answers = this.shuffleAnswers(this.correct_answer, this.incorrect_answers);
     }
 
