@@ -18,6 +18,7 @@ export class QuestionsListComponent implements OnInit, OnDestroy {
   private SubscriptionfetchQuestions: Subscription;
   private SubscriptionQuestionsChanged: Subscription;
   private SubscriptionquestionAnswerAdded: Subscription;
+  spinner: boolean = true;
  
 	constructor(
     private BackendService: BackendQuestionService,
@@ -40,7 +41,9 @@ export class QuestionsListComponent implements OnInit, OnDestroy {
     this.SubscriptionQuestionsChanged = this.questionService.questionsChanged.subscribe( 
       questions => {
         this.questions = questions;
+        this.spinner = false;
       }, error => {
+        this.spinner = false;
     })
     this.questions = this.questionService.getQuestions();
   }

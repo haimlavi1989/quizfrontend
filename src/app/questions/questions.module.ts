@@ -6,13 +6,15 @@ import { QuestionsItemComponent } from './questions-list/questions-item/question
 import { QuestionsRoutingModule } from './questions-routing.module';
 import { PrimeModule } from './../share/prime.module';
 import { ResultsComponent } from './results/results.component'
+import { LoadingSpinnerComponent } from '../share/componenets/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
     QuestionsComponent,
     QuestionsListComponent,
     QuestionsItemComponent,
-    ResultsComponent
+    ResultsComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     CommonModule,
