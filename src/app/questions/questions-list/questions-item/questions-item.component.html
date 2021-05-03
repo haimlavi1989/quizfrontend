@@ -1,7 +1,7 @@
 <div class="question-item">
     <div class="question-item-content">
         <div class="question-title">
-            <h5>{{ question?.question }}</h5>
+            <h5 [innerHTML]="question?.question"></h5>
         </div>
         <div class="question-options">
             <div class="p-grid">
@@ -11,9 +11,13 @@
                     <div class="option-box" 
                         (click)="radio.click()" 
                         [attr.data-answer]="shuffle_answer" 
-                        [ngClass]="{'incorrect': (userAnswersStatus[optionNumber] === 0) }"
                         [ngClass]="{'correct': (userAnswersStatus[optionNumber] === 1) }"
+                        [ngClass]="{'incorrect': (userAnswersStatus[optionNumber] === 0) }"
                         >
+
+                        <span class="feedback"
+                        [ngClass]="{'incorrect': (userAnswersStatus[optionNumber] === 0) }"
+                        ></span>
 
                         <input type="radio" #radio
                             id="{{'answer-'}}{{ optionNumber+1 }}"
@@ -25,6 +29,7 @@
                         <label for="{{'answer-'}}{{ optionNumber+1 }}">
                            {{optionNumber+1}}.{{ shuffle_answer }}
                         </label>
+
                     </div>
                 </div>
             </div>

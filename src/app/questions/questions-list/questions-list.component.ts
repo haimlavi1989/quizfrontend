@@ -19,6 +19,7 @@ export class QuestionsListComponent implements OnInit, OnDestroy {
   private SubscriptionQuestionsChanged: Subscription;
   private SubscriptionquestionAnswerAdded: Subscription;
   spinner: boolean = true;
+  firstpage: number = 0;
  
 	constructor(
     private BackendService: BackendQuestionService,
@@ -57,7 +58,7 @@ export class QuestionsListComponent implements OnInit, OnDestroy {
     })
   }
 
-  resetGame() {
+  resetGame(event) {
     this.playQuestionService.handleRestPlay();
   }
 

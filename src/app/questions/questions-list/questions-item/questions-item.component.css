@@ -3,10 +3,27 @@
   border-radius: 3px;
   text-align: center;
   padding: 0.7rem;
+  position: relative;
+}
+
+.question-title {
+  margin: 1rem;
 }
 
 .correct {
-  background-color: greenyellow;
+  background-color: #2196f3;
+}
+
+span.feedback.incorrect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: url(/assets/images/incorrect.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 20px;
+  width: 20px;
 }
 
 .option-box.incorrect {

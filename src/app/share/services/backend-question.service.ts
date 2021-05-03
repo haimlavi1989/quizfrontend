@@ -29,25 +29,29 @@ export class BackendQuestionService {
         map( response => {
           return response?.results.map( question => {
             return new Question(
-              this.convertQustion(question.question),
-              question.correct_answer,
-              question.incorrect_answers);
+              this.convertSpecialChar(question.question),
+              this.convertSpecialChar(question.correct_answer),
+              this.convertSpecialCharArray(question.incorrect_answers));
           });
         }),
         tap( question => {
           this.questionService.setQuestions(question);
-          console.log(question);
         })
 
       );
   }
 
-  convertQustion(str) {
-    str = str.replace(/&/g, "&amp;");
-    str = str.replace(/>/g, "&gt;");
-    str = str.replace(/</g, "&lt;");
-    str = str.replace(/"/g, "&quot;");
-    str = str.replace(/'/g, "&#039;");
+  convertSpecialChar(str) {
+    str = str.replace(/&amp;/g, "&");
+    str = str.replace(/&gt;/g, ">"); 
+    str = str.replace(/&lt;/g, "<");
+    str = str.replace(/&quot;/g, '"');
+    str = str.replace(/&#039;/g, "'");
     return str;
   }
+
+  convertSpecialCharArray(array: string[]) {
+    return array.map( item => this.convertSpecialChar(item))
+  }
+
 }

@@ -1,0 +1,30 @@
+.nav-header {
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2.5%;
+  position: fixed;
+  width: 100%;
+  background: #fff;
+  z-index: 1001;
+}
+
+.header {
+  padding-bottom: 70px;
+  margin: 0px;
+}
+
+.header-logo,
+.header-logo img {
+  max-height: 55px;
+  align-self: flex-start;
+}
+
+.haeder-item {
+  color: #292929;
+  font-family: sharp sans, sharpsans-semibold-regular,
+    sharp sans-semibold-regular, sans-serif;
+  font-weight: 600;
+  font-size: 19px;
+}
