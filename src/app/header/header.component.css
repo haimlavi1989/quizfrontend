@@ -28,3 +28,13 @@
   font-weight: 600;
   font-size: 19px;
 }
+
+.contactMe {
+  list-style: none;
+  display: inline-flex;
+}
+
+.contactMe img {
+  width: 25px;
+  height: 24px;
+}
